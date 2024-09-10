@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  frontend_api:
+    build: ./frontend_api
+    ports:
+      - "8002:8000"
+    depends_on:
+      - frontend_db
+      - redis
+    environment:
+      - DATABASE_URL=postgres://frontend_user:frontend_password@frontend_db:5432/frontend_db
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./frontend_api:/app
+
+  backend_api:
+    build: ./backend_api
+    ports:
+      - "8001:8001"
+    depends_on:
+      - backend_db
+      - redis
+    environment:
+      - DATABASE_URL=postgres://backend_user:backend_password@backend_db:5432/backend_db
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./backend_api:/app
+
+  frontend_db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=frontend_db
+      - POSTGRES_USER=frontend_user
+      - POSTGRES_PASSWORD=frontend_password
+    volumes:
+      - frontend_db_data:/var/lib/postgresql/data
+
+  backend_db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=backend_db
+      - POSTGRES_USER=backend_user
+      - POSTGRES_PASSWORD=backend_password
+    volumes:
+      - backend_db_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6
+    ports:
+      - "6380:6379"
+
+volumes:
+  frontend_db_data:
+  backend_db_data:

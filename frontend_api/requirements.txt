@@ -1,0 +1,6 @@
+Django
+djangorestframework
+gunicorn
+psycopg2-binary
+redis
+dj-database-url
