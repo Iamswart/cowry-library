@@ -34,6 +34,18 @@ This Library Management System is a distributed application consisting of two in
 
    ```
 
+3. Run test for both service
+
+   ```bash
+   docker-compose run --rm frontend_api python manage.py test
+
+   ```
+
+   ```bash
+   docker-compose run --rm backend_api python manage.py test
+
+   ```
+
 ## Usage
 
 ### Frontend API (http://localhost:8002)
