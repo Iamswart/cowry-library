@@ -1,2 +1,5 @@
 cowrywisebe
 cowrywise
+__pycache__/
+.DS_Store
+*.log
