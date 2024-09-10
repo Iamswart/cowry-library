@@ -34,7 +34,19 @@ This Library Management System is a distributed application consisting of two in
 
    ```
 
-3. Run test for both service
+3. Run migrations for both services
+
+   ```bash
+   docker-compose run --rm frontend_api python manage.py migrate
+
+   ```
+
+   ```bash
+   docker-compose run --rm backend_api python manage.py migrate
+
+   ```
+
+4. Run test for both service
 
    ```bash
    docker-compose run --rm frontend_api python manage.py test
